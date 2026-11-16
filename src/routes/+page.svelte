@@ -93,7 +93,7 @@
 	.hero { position: relative; padding: 96px 0 72px; overflow: hidden; }
 	.signal { position: absolute; left: 0; right: 0; top: 50%; height: 220px; transform: translateY(-50%); opacity: 0.45; pointer-events: none; }
 	.grid { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
-	@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .mark { order: -1; max-width: 300px; margin: 0 auto; } }
+	@media (max-width: 860px) { .signal { display: none; } .grid { grid-template-columns: 1fr; } .mark { order: -1; max-width: 300px; margin: 0 auto; } }
 	h1 { margin-bottom: 24px; } .cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
 	.mark { width: 100%; height: auto; border-radius: 50%; mask-image: radial-gradient(circle, #000 58%, transparent 72%); }
 	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 36px; }

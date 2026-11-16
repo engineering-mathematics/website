@@ -2,7 +2,7 @@
 	import { tiers, packages } from '#lib/data/packages.ts';
 	// Isometric slabs, widest at the bottom, as in the logo.
 	const slabs = [...tiers].reverse(); // tier 0 first (bottom)
-	const cx = 260, h0 = 66, step = 62, t = 22;
+	const cx = 340, h0 = 66, step = 62, t = 22;
 	let active = $state(1);
 	const members = (id: number) => packages.filter((p) => p.tier === id);
 	const info = $derived(tiers.find((x) => x.id === active)!);
@@ -15,15 +15,15 @@
 </script>
 
 <div class="grid">
-	<svg viewBox="0 0 520 400" role="img" aria-label="Five-tier dependency stack">
+	<svg viewBox="0 0 600 400" role="img" aria-label="Five-tier dependency stack">
 		{#each slabs as s, i}
 			{@const g = geom(i)}
 			<g class="slab" class:on={active === s.id} class:planned={s.planned} onclick={() => (active = s.id)} onkeydown={(e) => e.key === 'Enter' && (active = s.id)} role="button" tabindex="0" aria-label="Tier {s.id}: {s.name}">
 				<polygon points={g.l} class="side" /><polygon points={g.r} class="side r" /><polygon points={g.pts} class="top" />
-				<text x={cx} y={g.y + 4} text-anchor="middle">TIER {s.id}</text>
+				<text x={cx - g.w - 14} y={g.y + 4} text-anchor="end">TIER {s.id}</text>
 			</g>
 		{/each}
-		<text x="500" y="30" text-anchor="end" class="arrow">depends on ↓</text>
+		<text x="590" y="30" text-anchor="end" class="arrow">depends on ↓</text>
 	</svg>
 	<div class="panel">
 		<span class="eyebrow">Tier {active}{info.planned ? ' · planned' : ''}</span>

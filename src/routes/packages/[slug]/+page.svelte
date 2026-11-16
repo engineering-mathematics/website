@@ -51,7 +51,7 @@
 
 <style>
 	.back { font: 0.85rem var(--mono); color: var(--muted); }
-	header { display: flex; gap: 28px; align-items: center; margin: 28px 0 40px; } header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 12px; font-family: var(--mono); font-weight: 500; letter-spacing: -0.02em; }
+	header { display: flex; gap: 28px; align-items: center; margin: 28px 0 40px; } header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 12px; font-family: var(--mono); font-weight: 500; letter-spacing: -0.02em; overflow-wrap: anywhere; }
 	.two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: start; } @media (max-width: 820px) { .two { grid-template-columns: 1fr; } header { flex-direction: column; align-items: flex-start; } }
 	.meta { display: grid; gap: 10px; font-size: 0.92rem; color: var(--muted); } .meta span { display: inline-block; width: 78px; font: 500 0.7rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
 	.note { font-size: 0.85rem; color: var(--dim); margin-top: 14px; }
