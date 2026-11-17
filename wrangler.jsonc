@@ -1,0 +1,10 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "engg-math-website",
+	"compatibility_date": "2026-11-16",
+	// Static site: upload the prerendered output, no Worker script.
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "404-page"
+	}
+}

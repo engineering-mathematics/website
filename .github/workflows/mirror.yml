@@ -1,0 +1,36 @@
+# Publishes main of the private production repository to the public repository.
+# Fast-forward only: it fails if the public repository has commits that are not in production yet.
+name: mirror
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    if: github.repository == 'ShivtejG236/engg-math-website'
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_REPO: engineering-mathematics/website
+      DEPLOY_KEY: ${{ secrets.PUBLIC_DEPLOY_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Push main to the public repository
+        run: |
+          if [ -z "$DEPLOY_KEY" ]; then
+            echo "::warning::PUBLIC_DEPLOY_KEY is not set; nothing mirrored."
+            exit 0
+          fi
+          git clone --quiet --bare "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+          mkdir -p ~/.ssh
+          install -m 600 /dev/null ~/.ssh/mirror
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/mirror
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/mirror -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+          git -C repo push "git@github.com:${PUBLIC_REPO}.git" "${GITHUB_SHA}:refs/heads/main"
